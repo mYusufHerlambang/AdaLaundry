@@ -11,7 +11,7 @@ import org.springframework.data.repository.query.Param;
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
     @Query("""
-            SELECT new com.adaLaundry.dto.order.OrderGridDTO(ord.entryDate, ord.payStatus, cus.fullName,
+            SELECT new com.adaLaundry.dto.order.OrderGridDTO(ord.entryDate, ord.pickUpDate, ord.payStatus, cus.fullName,
                 pc.packageName, ord.orderStatus, ord.bill)
             FROM Order ord
                 JOIN ord.customer cus

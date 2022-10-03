@@ -28,7 +28,7 @@ public class ControllerOrderRest {
     @Autowired
     private OrderService orderService;
 
-    private final Integer maxRows = 10;
+    private final Integer maxRows = 2;
 
     @GetMapping("/index")
     public Object orderIndex(@RequestParam(defaultValue = "1") Integer page,

@@ -13,6 +13,8 @@ public class OrderGridDTO {
 
     private LocalDate entryDate;
 
+    private LocalDate pickUpDateMin;
+
     private String payStatus;
 
     private String fullName;
