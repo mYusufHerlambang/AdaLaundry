@@ -36,7 +36,7 @@ public class JwtToken {
         builder = builder.setSubject(subject)
                 .claim("username", username)
                 .claim("role", role)
-                .setIssuer("http://localhost:8080")
+                .setIssuer("http://localhost:3000")
                 .setAudience(audience)
                 .signWith(SignatureAlgorithm.HS256, secretKey);// secret key harus minimal 32 character karna pake HS256
 
