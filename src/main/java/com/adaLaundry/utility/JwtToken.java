@@ -25,20 +25,15 @@ public class JwtToken {
         return claims.get("username", String.class);
     }
 
-    public String generateToken(
-            String subject,
-            String username,
-            String secretKey,
-            String role,
-            String audience) {
+    public String generateToken(String username, String role) {
 
         JwtBuilder builder = Jwts.builder();
-        builder = builder.setSubject(subject)
+        builder = builder
                 .claim("username", username)
                 .claim("role", role)
                 .setIssuer("http://localhost:3000")
-                .setAudience(audience)
-                .signWith(SignatureAlgorithm.HS256, secretKey);// secret key harus minimal 32 character karna pake HS256
+                .setAudience(this.audience)
+                .signWith(SignatureAlgorithm.HS256, this.SECRET_KEY);// secret key harus minimal 32 character karna pake HS256
 
         return builder.compact();
     }

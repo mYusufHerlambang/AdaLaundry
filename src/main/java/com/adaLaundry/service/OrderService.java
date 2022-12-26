@@ -14,5 +14,5 @@ public interface OrderService {
 
     Order getOrderById(Long id);
 
-    Order updateOrderById(OrderUpdateDTO updateDTO, Long id);
+    Order updateOrderById(OrderUpdateDTO updateDTO, Long id, String admin);
 }

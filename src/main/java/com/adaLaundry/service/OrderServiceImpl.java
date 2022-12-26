@@ -101,7 +101,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order updateOrderById(OrderUpdateDTO updateDTO, Long id) {
+    public Order updateOrderById(OrderUpdateDTO updateDTO, Long id, String admin) {
 
         Order orderById = getOrderById(id);
 
@@ -109,6 +109,7 @@ public class OrderServiceImpl implements OrderService {
 
             orderById.setPayStatus(updateDTO.getPayStatus());
             orderById.setOrderStatus(updateDTO.getOrderStatus());
+            orderById.setUpdatedBy(admin);
         }
 
         orderRepository.save(orderById);

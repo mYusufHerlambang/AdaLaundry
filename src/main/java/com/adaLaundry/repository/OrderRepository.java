@@ -12,7 +12,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
     @Query("""
             SELECT new com.adaLaundry.dto.order.OrderGridDTO(ord.entryDate, ord.pickUpDate, ord.payStatus, cus.fullName,
-                pc.packageName, ord.orderStatus, ord.bill)
+                pc.packageName, ord.orderStatus, ord.bill, ord.updatedBy)
             FROM Order ord
                 JOIN ord.customer cus
                 JOIN ord.packages pc

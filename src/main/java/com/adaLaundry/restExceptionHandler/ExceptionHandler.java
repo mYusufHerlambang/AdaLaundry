@@ -28,9 +28,18 @@ public class ExceptionHandler {
         e.getBindingResult()
                 .getAllErrors()
                 .forEach(error -> {
-                    String fieldName = ((FieldError) error).getField();
-                    String errorMessage = error.getDefaultMessage();
-                    errors.put(fieldName, errorMessage);
+                    String fieldName = null;
+                    String errorMessage = null;
+
+                    if(error instanceof FieldError){
+                        fieldName = ((FieldError) error).getField();
+                        errorMessage = error.getDefaultMessage();
+                        errors.put(fieldName, errorMessage);
+                    } else {
+                        fieldName = error.getObjectName();
+                        errorMessage = error.getDefaultMessage();
+                        errors.put(fieldName, errorMessage);
+                    }
                 });
 
         ErrorResponse errorResponseValidation = new ErrorResponse();
@@ -39,5 +48,23 @@ public class ExceptionHandler {
         errorResponseValidation.setTimeStamp(System.currentTimeMillis());
 
         return new ResponseEntity<>(errorResponseValidation,HttpStatus.NOT_ACCEPTABLE);
+    }
+
+    @org.springframework.web.bind.annotation.ExceptionHandler
+    public ResponseEntity<ErrorResponse> invalidUsernamePass(InvalidUsernameOrPassword invalidUsernameOrPassword){
+        ErrorResponse error = new ErrorResponse();
+        error.setStatus(HttpStatus.BAD_REQUEST.value());
+        error.setMessages(invalidUsernameOrPassword.getMessage());
+        error.setTimeStamp(System.currentTimeMillis());
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @org.springframework.web.bind.annotation.ExceptionHandler
+    public ResponseEntity<ErrorResponse> internalServerError(InternalServerError internalServerError){
+        ErrorResponse error = new ErrorResponse();
+        error.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        error.setMessages(internalServerError.getMessage());
+        error.setTimeStamp(System.currentTimeMillis());
+        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

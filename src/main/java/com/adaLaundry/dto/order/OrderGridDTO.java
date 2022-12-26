@@ -25,4 +25,6 @@ public class OrderGridDTO {
 
     private Double bill;
 
+    private String updatedBy;
+
 }

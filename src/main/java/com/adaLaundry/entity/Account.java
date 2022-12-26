@@ -1,5 +1,6 @@
 package com.adaLaundry.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.Column;
@@ -19,6 +20,7 @@ public class Account {
     @Column(name="Username")
     private String username;
 
+    @JsonIgnore
     @Column(name="Password")
     private String password;
 
